@@ -1,5 +1,6 @@
 <h1>{{ title }}</h1>
 
+<div id='map-update'></div>
 {{#with place}}
 <form method="post">
     <label for="input-name"></label>
@@ -16,4 +17,45 @@
 
     <button>Update the place</button>
 </form>
-    {{/with}}
+{{/with}}
+
+<script>
+    function updateMap () {
+    const mapElement = document.getElementById('map-update');
+    const place = {{{ json place }}};
+    const latitude = place.location.coordinates[1];
+    const longitude = place.location.coordinates[0];
+    const map = new google.maps.Map(mapElement, {
+      center: {
+        lat: latitude,
+        lng: longitude
+      },
+      zoom: 10
+
+      map.addListener('click', (event) => {
+          const latitude = event.latLng.lat();
+          const longitude = event.latLng.lng();
+          if(maker) {
+              maker.setMap(null);
+          }
+          maker = new google.maps.Marker({
+              position: {
+                  lat: latitude,
+                  lng: longitude
+              }
+              map: map
+          });
+      });
+    });
+
+      let marker = new google.maps.Marker({
+        position: {
+          lat: latitude,
+          lng: longitude
+        },
+        map: map
+      });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0DqXPpPxcJTpR7EvVNsWAUVTKLQZclUw&callback=updateMap" defer></script>

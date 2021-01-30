@@ -1,5 +1,7 @@
 {{ title }}
 
+<div id="map-single"></div>
+
 {{#with place}}
 <div class="single-place">
     <a href="/place/{{_id}}"><h4>{{name}}</h4></a>
@@ -11,5 +13,30 @@
 <button id="to-delete">Delete this place</button>
 </form>
 
-
 {{/with}}
+
+<script>
+  function newMap () {
+    const mapElement = document.getElementById('map-single');
+    const place = {{{ json place }}};
+    const latitude = place.location.coordinates[1];
+    const longitude = place.location.coordinates[0];
+    const map = new google.maps.Map(mapElement, {
+      center: {
+        lat: latitude,
+        lng: longitude
+      },
+      zoom: 15
+    });
+
+      const marker = new google.maps.Marker({
+        position: {
+          lat: latitude,
+          lng: longitude
+        },
+        map: map
+      });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0DqXPpPxcJTpR7EvVNsWAUVTKLQZclUw&callback=newMap" defer></script>

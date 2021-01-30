@@ -13,7 +13,10 @@ router.post('/create', (req, res, next) => {
   console.log(data);
   Place.create({
     name: data.name,
-    type: data.type
+    type: data.type,
+    location: {
+        coordinates: [data.longitude, data.latitude]
+      }
   })
     .then((place) => {
       console.log(place);

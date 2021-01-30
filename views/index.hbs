@@ -1,5 +1,7 @@
 <h1>Coffee and Books</h1>
 
+<div id="map-all-places"></div>
+
 {{#each places}}
 <div class="single-place">
 <a href="/place/{{_id}}"><h4>{{name}}</h4></a>
@@ -8,4 +10,30 @@
 
 {{/each}}
 
+<script>
+  function createMap () {
+    const mapElement = document.getElementById('map-all-places');
+    const map = new google.maps.Map(mapElement, {
+      center: {
+        lat: 52.52,
+        lng: 13.4
+      },
+      zoom: 10
+    });
+    const places = {{{ json places }}};
+    for (let place of places) {
+      const marker = new google.maps.Marker({
+        position: {
+          lat: place.location.coordinates[1],
+          lng: place.location.coordinates[0]
+        },
+        map: map
+      })
+      marker.addListener('click', () => {
+        window.location = `/place/${place._id}`;
+      });
+    }
+  }
+</script>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0DqXPpPxcJTpR7EvVNsWAUVTKLQZclUw&callback=createMap" defer></script>
