@@ -1,0 +1,15 @@
+{{ title }}
+
+{{#with place}}
+<div class="single-place">
+    <a href="/place/{{_id}}"><h4>{{name}}</h4></a>
+    <span>{{type}}</span>
+</div>
+
+<a id="to-update" href="/place/{{_id}}/update">Update information</a>
+<form action="/place/{{_id}}/delete" method="POST">
+<button id="to-delete">Delete this place</button>
+</form>
+
+
+{{/with}}

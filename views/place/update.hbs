@@ -1,0 +1,19 @@
+<h1>{{ title }}</h1>
+
+{{#with place}}
+<form method="post">
+    <label for="input-name"></label>
+    <input id="input-name" type="text" name="name" value="{{ name }}">
+    <div>
+        <input type="radio" id="coffee_shop" name="type" value="coffee_shop">
+        <label for="coffee_shop">Coffee Shop</label>
+    </div>
+
+    <div>
+        <input type="radio" id="bookstore" name="type" value="bookstore">
+        <label for="bookstore">Book Store</label>
+    </div>
+
+    <button>Update the place</button>
+</form>
+    {{/with}}

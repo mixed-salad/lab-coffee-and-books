@@ -1,0 +1,18 @@
+.single-place{
+    width: 50em;
+    margin-bottom: 2em;
+    h4{
+        color: rgb(0, 66, 0);
+    }
+}
+
+#to-update,
+#to-delete {
+    display: block;
+    text-align: center;
+    border: solid 1px black;
+    // border-radius: 20%;
+    padding: .5em 1em;
+    margin: 1em;
+}
+

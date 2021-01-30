@@ -7,13 +7,12 @@ const placeSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: [coffee_shop, bookstore]
-    }
-    ,
-    timestamps: true
-});
+        enum: ['coffee_shop', 'bookstore']
+    }},
+    {timestamps: { createdAt: 'created_at' }}
+);
 
-const Place = mongoose.model(Place, placeSchema);
+const Place = mongoose.model('Place', placeSchema);
 
 module.exports = Place;
 
